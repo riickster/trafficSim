@@ -1,15 +1,10 @@
 from trafficSimulator import *
 
-# Play with these
 n = 15
-a = 2
-b = 12
-l = 50
-
-# Create simulation
 sim = Simulation()
 
-#Intersections (10)
+def road_class(a): 
+    return range(a, a+n)
 
 #North Fragments
 I_NORTH_1_RIGHT_ORIGIN = (-10, 40)
@@ -87,7 +82,6 @@ EAST_RIGHT_CTRL_1 = (-60, -70)
 EAST_RIGHT_CTRL_2 = (20, -70)
 
 sim.create_roads([
-
     (SOUTH_RIGHT_ORIGIN, I_SOUTH_RIGHT_CHK_1), # 0
     (I_SOUTH_RIGHT_CHK_1, SOUTH_RIGHT_CHK_2), # 1
     (SOUTH_RIGHT_CHK_2, SOUTH_RIGHT_CHK_3), # 2
@@ -144,25 +138,19 @@ sim.create_roads([
     *curve_road((40, 10), (30, 0), (30, 10)), #Target 7 388->402
 ])
 
-def road(a): return range(a, a+n)
-
 sim.create_gen({
     'vehicle_rate': 20,
     'vehicles': [
-        [1, {"path": [0, 1, *road(2), *road(298)]}], # BottomLeft Objective 1
-        [1, {"path": [0, *road(35), 50, *road(117), 132, *road(201), *road(313)]}], # BottomLeft Objective 2
-        
-        [1, {"path": [165, 166, 167, *road(358)]}], # TopLeft Objective 5 
-
-        [1, {"path": [0, *road(35), 50, 51, 52, *road(53), 68, *road(69), 84, *road(328)]}], # Objective 3
-        [1, {"path": [0, *road(35), 50, *road(117), 132, *road(133), 148, *road(343)]}], # Objective 4
-
+        [1, {"path": [0, 1, *road_class(2), *road_class(298)]}], # BottomLeft Objective 1
+        [1, {"path": [0, *road_class(35), 50, *road_class(117), 132, *road_class(201), *road_class(313)]}], # BottomLeft Objective 2
+        [1, {"path": [0, *road_class(35), 50, 51, 52, *road_class(53), 68, *road_class(69), 84, *road_class(328)]}], # Objective 3
+        [1, {"path": [0, *road_class(35), 50, *road_class(117), 132, *road_class(133), 148, *road_class(343)]}], # Objective 4
+        [1, {"path": [165, 166, 167, *road_class(358)]}], # TopLeft Objective 5 
     ]
 })
 
-sim.create_signal([[50, 165, 184], [266, 85, 101]])
+sim.create_traffic_light([[50, 165, 184], [266, 85, 101]])
 
-# Start simulation
 win = Window(sim)
 win.run(steps_per_update=3)
 
