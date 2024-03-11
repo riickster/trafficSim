@@ -1,5 +1,5 @@
-from .vehicle_class import Vehicle
 from numpy.random import randint
+from vehicle_class import Vehicle
 
 class VehicleGenerator:
     def __init__(self, sim, config={}, messaging_channel=None):

@@ -1,4 +1,6 @@
-from trafficSimulator import *
+from pygame_class import Window
+from curve_class import curve_road
+from simulation_class import Simulation
 
 n = 15
 sim = Simulation()

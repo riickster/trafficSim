@@ -1,8 +1,8 @@
-from .road_class import Road
 from copy import deepcopy
-from .vehicle_gen import VehicleGenerator
-from .traffic_lights import TrafficLight
-from .global_messages import Messaging
+from road_class import Road
+from global_messages import Messaging
+from traffic_lights import TrafficLight
+from vehicle_gen import VehicleGenerator
 
 class Simulation:
     def __init__(self, config={}):
